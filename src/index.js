@@ -1,18 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
-import { createStore } from "redux";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter } from "react-router-dom";
+import { applyMiddleware, createStore } from "redux";
 import { Provider } from "react-redux";
-import { myReducer } from './reducers';
+import { myReducer } from "./reducers";
+import thunk from "redux-thunk";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+const depo = createStore(myReducer, applyMiddleware(thunk));
 
-const depo = createStore(myReducer);
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={depo}>
+    <ToastContainer />
     <BrowserRouter>
       <>
         <App />
